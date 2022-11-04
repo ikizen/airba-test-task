@@ -12,7 +12,7 @@ import {
 import { faUser, faUnlock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
-import { LoginRedux } from "../app/IsLoggedIn";
+import { loginActions } from "../app/IsLoggedIn";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -26,8 +26,9 @@ export default function Login() {
         console.log("subimted");
         console.log(user);
         console.log(pwd);
-        if (user === "admin@admin" && pwd === "12345") {
-            dispatch(LoginRedux.login(true));
+        if (user === "admin" && pwd === "12345") {
+            dispatch(loginActions.login(user));
+            // console.log(LoginRedux.login(true));
             console.log("Well done");
             navigate("/profile");
             console.log(pwd);
@@ -58,8 +59,7 @@ export default function Login() {
                                         }
                                     />
                                     <Input
-                                        type="email"
-                                        placeholder="Email"
+                                        placeholder="Username"
                                         onChange={(e) =>
                                             setUser(e.target.value)
                                         }

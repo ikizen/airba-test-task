@@ -11,16 +11,20 @@ import AnimeFilms from "./components/AnimeFilms";
 import Profile from "./components/Profile";
 import { ChakraProvider } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
+import { useDispatch, useSelector } from "react-redux";
+import { loginActions } from "./app/IsLoggedIn";
+import { useEffect } from "react";
 
 export default function App() {
+    const dispatch = useDispatch();
     // const navigate = useNavigate();
-    const isLoggedIn = true;
+    // const isLoggedIn = dispatch(loginActions.login);
+    const isLoggedIn = useSelector((state) => !!state.loginActions);
+    console.log(isLoggedIn);
 
-    const toLoginPage = () => {
-        if (isLoggedIn) {
-            // navigate("/login");
-        }
-    };
+    // const passed = () => {
+    // };
+    // useSelector((state) => !!state.loginActions.login);
 
     return (
         <ChakraProvider>
@@ -28,14 +32,14 @@ export default function App() {
                 <NavBar />
                 <Routes>
                     <Route path="/" element={<Home />} />
-                    {/* {isLoggedIn ? (
-                        <Route path="/anime-films" element={<AnimeFilms />} />
-                    ) : (
-                        toLoginPage()
-                    )} */}
-                    <Route path="/anime-films" element={<AnimeFilms />} />
-                    <Route path="/profile" element={<Profile />} />
+                    {isLoggedIn && (
+                        <Route path="/profile" element={<Profile />} />
+                    )}
                     <Route path="/login" element={<Login />} />
+
+                    {isLoggedIn && (
+                        <Route path="/anime-films" element={<AnimeFilms />} />
+                    )}
                 </Routes>
             </Router>
         </ChakraProvider>

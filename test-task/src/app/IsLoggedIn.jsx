@@ -1,20 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const LoggedInSlice = createSlice({
+const loginSlice = createSlice({
     name: "login",
-    initialState: { isLoggedIn: false },
+    initialState: { isLoggedIn: null },
     reducers: {
-        loggedIn: (state) => {
-            state.isLoggedIn = true;
+        login: (state, value) => {
+            state.isLoggedIn = value;
         },
-        notLoggedIn: (state) => {
-            state.isLoggedIn = false;
+        logout: (state) => {
+            state.isLoggedIn = null;
         },
     },
 });
 
 //This is for dispatch
-export const { LoginRedux } = LoggedInSlice.actions;
+export const loginActions = loginSlice.actions;
 
 //This is for ConfigureStore
-export default LoggedInSlice.reducer;
+export default loginSlice.reducer;
