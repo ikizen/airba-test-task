@@ -7,6 +7,10 @@ import {
     InputLeftElement,
     Stack,
     Button,
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription,
 } from "@chakra-ui/react";
 import { faUser, faUnlock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,9 +18,20 @@ import { useDispatch } from "react-redux";
 import { loginActions } from "../app/isLoggedIn";
 import { useNavigate } from "react-router-dom";
 
+const alert = () => {
+    return (
+        <Alert status="error">
+            <AlertIcon />
+            There was an error processing your request
+        </Alert>
+    );
+};
+
 export default function Login() {
     const [user, setUser] = useState("");
     const [pwd, setPwd] = useState("");
+    const [showAlert, setShowAlert] = useState(false);
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -28,12 +43,21 @@ export default function Login() {
             localStorage.setItem("user", user);
             navigate("/profile");
         } else {
-            alert("wrong");
+            setShowAlert(true);
         }
     };
 
     return (
         <>
+            {showAlert && (
+                <Alert status="error">
+                    <AlertIcon />
+                    <AlertTitle>Error!</AlertTitle>
+                    <AlertDescription>
+                        Email/ Password Did Not Matched.
+                    </AlertDescription>
+                </Alert>
+            )}
             <div className="flex justify-center items-center min-w-full min-h-screen bg-orange-500">
                 <Box
                     bg="white"
