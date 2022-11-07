@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@chakra-ui/react";
-import { loginActions } from "../app/IsLoggedIn";
+import { loginActions } from "../app/isLoggedIn";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -17,9 +17,9 @@ export default function NavBar() {
         }
     }, []);
 
-    const goLogin = async () => {
-        if (isLoggedIn === false) {
-            await navigate("/login");
+    const goLogin = () => {
+        if (!isLoggedIn) {
+            navigate("/login");
         }
     };
 
@@ -33,9 +33,7 @@ export default function NavBar() {
                     </Link>
                     {
                         <Link to="/profile">
-                            <Button colorScheme="blue" onClick={goLogin}>
-                                Profile
-                            </Button>
+                            <Button colorScheme="blue">Profile</Button>
                         </Link>
                     }
                     <Link to="/anime-films">

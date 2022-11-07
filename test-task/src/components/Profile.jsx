@@ -8,11 +8,11 @@ export default function Profile() {
 
     const isLoggedIn = useSelector((state) => !!state.loginActions);
 
-    useEffect(() => {
-        if (!isLoggedIn) {
-            navigate("/login");
-        }
-    }, []);
+    // useEffect(() => {
+    //     if (!isLoggedIn) {
+    //         navigate("/login");
+    //     }
+    // }, []);
 
     return (
         <>

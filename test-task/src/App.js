@@ -12,8 +12,21 @@ import Profile from "./components/Profile";
 import { ChakraProvider } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import { useDispatch, useSelector } from "react-redux";
-import { loginActions } from "./app/IsLoggedIn";
+import { loginActions } from "./app/isLoggedIn";
 import { useEffect } from "react";
+
+const PrivateRoute = ({ children }) => {
+    const navigate = useNavigate();
+    const isLoggedIn = useSelector((state) => !!state.loginActions);
+
+    useEffect(() => {
+        if (!isLoggedIn) {
+            navigate("/login");
+        }
+    }, [isLoggedIn]);
+
+    return children;
+};
 
 export default function App() {
     const dispatch = useDispatch();
@@ -31,15 +44,32 @@ export default function App() {
             <Router>
                 <NavBar />
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    {isLoggedIn && (
-                        <Route path="/profile" element={<Profile />} />
-                    )}
+                    <Route
+                        path="/"
+                        element={
+                            <PrivateRoute>
+                                <Home />
+                            </PrivateRoute>
+                        }
+                    />
                     <Route path="/login" element={<Login />} />
 
-                    {isLoggedIn && (
-                        <Route path="/anime-films" element={<AnimeFilms />} />
-                    )}
+                    <Route
+                        path="/profile"
+                        element={
+                            <PrivateRoute>
+                                <Profile />
+                            </PrivateRoute>
+                        }
+                    />
+                    <Route
+                        path="/anime-films"
+                        element={
+                            <PrivateRoute>
+                                <AnimeFilms />
+                            </PrivateRoute>
+                        }
+                    />
                 </Routes>
             </Router>
         </ChakraProvider>

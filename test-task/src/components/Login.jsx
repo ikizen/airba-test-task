@@ -12,7 +12,7 @@ import {
 import { faUser, faUnlock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useDispatch } from "react-redux";
-import { loginActions } from "../app/IsLoggedIn";
+import { loginActions } from "../app/isLoggedIn";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
@@ -21,9 +21,9 @@ export default function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event, data) => {
         event.preventDefault();
-        console.log("subimted");
+        console.log("subimted", event.target.value);
         console.log(user);
         console.log(pwd);
         if (user === "admin" && pwd === "12345") {
