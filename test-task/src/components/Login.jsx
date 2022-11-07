@@ -6,7 +6,6 @@ import {
     FormControl,
     InputLeftElement,
     Stack,
-    chakra,
     Button,
 } from "@chakra-ui/react";
 import { faUser, faUnlock } from "@fortawesome/free-solid-svg-icons";
@@ -21,18 +20,15 @@ export default function Login() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleSubmit = (event, data) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
-        console.log("subimted", event.target.value);
-        console.log(user);
-        console.log(pwd);
+        console.log("subimted");
         if (user === "admin" && pwd === "12345") {
-            dispatch(loginActions.login(user));
-            // console.log(LoginRedux.login(true));
             console.log("Well done");
+            localStorage.setItem("user", user);
             navigate("/profile");
-            console.log(pwd);
-            console.log(user);
+        } else {
+            alert("wrong");
         }
     };
 

@@ -9,8 +9,6 @@ export default function AnimeFilms() {
     const fetchFilms = async () => {
         await axios.get(url).then((response) => {
             const filmData = response.data;
-            // console.log(response.data);
-            // filmData.map((film) => console.log(film.title));
             setFilms(filmData);
         });
     };

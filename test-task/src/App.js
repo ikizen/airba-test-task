@@ -11,14 +11,11 @@ import AnimeFilms from "./components/AnimeFilms";
 import Profile from "./components/Profile";
 import { ChakraProvider } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
-import { useDispatch, useSelector } from "react-redux";
-import { loginActions } from "./app/isLoggedIn";
 import { useEffect } from "react";
 
 const PrivateRoute = ({ children }) => {
+    const isLoggedIn = localStorage.getItem("user");
     const navigate = useNavigate();
-    const isLoggedIn = useSelector((state) => !!state.loginActions);
-
     useEffect(() => {
         if (!isLoggedIn) {
             navigate("/login");
@@ -29,16 +26,6 @@ const PrivateRoute = ({ children }) => {
 };
 
 export default function App() {
-    const dispatch = useDispatch();
-    // const navigate = useNavigate();
-    // const isLoggedIn = dispatch(loginActions.login);
-    const isLoggedIn = useSelector((state) => !!state.loginActions);
-    console.log(isLoggedIn);
-
-    // const passed = () => {
-    // };
-    // useSelector((state) => !!state.loginActions.login);
-
     return (
         <ChakraProvider>
             <Router>

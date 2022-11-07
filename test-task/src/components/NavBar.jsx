@@ -23,6 +23,10 @@ export default function NavBar() {
         }
     };
 
+    const logout = () => {
+        localStorage.removeItem("user");
+    };
+
     return (
         <>
             <div className="flex flex-row text-yellow-50 font-bold font-mono justify-between items-center p-3 bg-orange-800">
@@ -39,6 +43,9 @@ export default function NavBar() {
                     <Link to="/anime-films">
                         <Button colorScheme="blue">Anime Films</Button>
                     </Link>
+                    <Button colorScheme="blue" onClick={logout}>
+                        Log out
+                    </Button>
                     {/* <Link to="/login">
                         <Button colorScheme="blue">Login</Button>
                     </Link> */}
